@@ -1,377 +1,279 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>School Management System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harra School Management System</title>
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f7f6;
+            font-family: Arial, sans-serif;
         }
+
         .sidebar {
-            background-color: #0d47a1;
-            color: white;
-            height: 100vh;
             position: fixed;
-            width: 250px;
-            padding-top: 20px;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 200px;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-right: 1px solid #ddd;
         }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+
         .sidebar a {
-            color: white;
             text-decoration: none;
-            display: block;
-            padding: 10px 20px;
+            color: #337ab7;
         }
+
         .sidebar a:hover {
-            background-color: #1565c0;
+            color: #23527c;
         }
-        .sidebar .active {
-            background-color: #1565c0;
-        }
-        .content {
-            margin-left: 250px;
+
+        .dashboard-content {
+            margin-left: 200px;
             padding: 20px;
         }
-        .header {
-            background-color: white;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #ddd;
-        }
-        .header .search-bar {
-            width: 300px;
-        }
-        .header .user-info {
-            display: flex;
-            align-items: center;
-        }
-        .header .user-info img {
-            border-radius: 50%;
-            margin-right: 10px;
-        }
+
         .card {
             margin-bottom: 20px;
         }
-        .card-header {
-            background-color: white;
-            border-bottom: 1px solid #ddd;
-        }
+
         .card-body {
-            background-color: white;
-        }
-        .social-card {
-            color: white;
             padding: 20px;
-            border-radius: 5px;
         }
-        .social-card.facebook {
-            background-color: #3b5998;
-        }
-        .social-card.twitter {
-            background-color: #1da1f2;
-        }
-        .social-card.google-plus {
-            background-color: #db4437;
-        }
-        .social-card.linkedin {
-            background-color: #0077b5;
-        }
-        .calendar {
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-        }
-        .calendar .day {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
-            text-align: center;
-            margin: 5px;
-            border-radius: 50%;
-        }
-        .calendar .day.active {
-            background-color: #4caf50;
-            color: white;
-        }
-        .calendar .day.event {
-            background-color: #f44336;
-            color: white;
-        }
-        .notice-board, .recent-activities {
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-        }
-        .notice-board .notice, .recent-activities .activity {
+
+        .card-title {
             margin-bottom: 10px;
         }
-        .notice-board .notice .date, .recent-activities .activity .time {
-            font-size: 12px;
-            color: #999;
+
+        .list-group {
+            margin-bottom: 20px;
+        }
+
+        .list-group-item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .list-group-item:last-child {
+            border-bottom: none;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 200px;
+        }
+
+        .calendar-container {
+            width: 100%;
+            height: 200px;
         }
     </style>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Your System Name</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Language</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Notifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">User Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="sidebar">
-        <div class="text-center mb-4">
-            <img alt="School Logo" class="img-fluid" height="100" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-RcpoXHkzChYnDbFAyeQ8tamr/user-ehrvabJ3DufsCu8YJ7PqY5gl/img-IXlgfKHVzLqUxwjYotuX4kby.png?st=2024-09-30T15%3A23%3A07Z&se=2024-09-30T17%3A23%3A07Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-09-30T00%3A59%3A33Z&ske=2024-10-01T00%3A59%3A33Z&sks=b&skv=2024-08-04&sig=XT2PnNsVyAXPT1x06%2Bhc3e7O3qR8RPI5eWhV5DfeffQ%3D" width="100"/>
-        </div>
-        <a class="active" href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-        <a href="#"><i class="fas fa-user-shield"></i> Admin</a>
-        <a href="#"><i class="fas fa-user-graduate"></i> Student</a>
-        <a href="#"><i class="fas fa-user-friends"></i> Parents</a>
-        <a href="#"><i class="fas fa-chalkboard-teacher"></i> Teachers</a>
-        <a href="#"><i class="fas fa-book"></i> Library</a>
-        <a href="#"><i class="fas fa-wallet"></i> Account</a>
-        <a href="#"><i class="fas fa-school"></i> Class</a>
-        <a href="#"><i class="fas fa-book-open"></i> Subject</a>
-        <a href="#"><i class="fas fa-calendar-alt"></i> Class Routine</a>
-        <a href="#"><i class="fas fa-check-square"></i> Attendance</a>
-        <a href="#"><i class="fas fa-file-alt"></i> Exam</a>
-        <a href="#"><i class="fas fa-bus"></i> Transport</a>
-        <a href="#"><i class="fas fa-bed"></i> Hostel</a>
-        <a href="#"><i class="fas fa-bell"></i> Notice</a>
-        <a href="#"><i class="fas fa-envelope"></i> Message</a>
-        <a href="#"><i class="fas fa-cogs"></i> UI Elements</a>
-        <a href="#"><i class="fas fa-map-marker-alt"></i> Map</a>
-        <a href="#"><i class="fas fa-user-cog"></i> Account</a>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Admin</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Student</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Parents</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Teachers</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Library</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Account</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Class</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Subject</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Class Routine</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Attendance</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Exam</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Transport</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Hostel</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Notice</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Message</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"> UI Elements</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Map</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Account</a>
+            </li>
+        </ul>
     </div>
-    <div class="content">
-        <div class="header">
-            <div>
-                <h4>Welcome To <span>School Management System</span></h4>
-            </div>
-            <div class="search-bar">
-                <input class="form-control" placeholder="Search Here ..." type="text"/>
-            </div>
-            <div class="user-info">
-                <div class="dropdown">
-                    <button aria-expanded="false" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" id="dropdownMenuButton" type="button">English</button>
-                    <ul aria-labelledby="dropdownMenuButton" class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">English</a></li>
-                        <li><a class="dropdown-item" href="#">Spanish</a></li>
-                    </ul>
-                </div>
-                <div class="ms-3">
-                    <i class="fas fa-bell"></i>
-                    <i class="fas fa-envelope"></i>
-                    <i class="fas fa-cog"></i>
-                </div>
-                <div class="ms-3">
-                    <img alt="User Avatar" height="40" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-RcpoXHkzChYnDbFAyeQ8tamr/user-ehrvabJ3DufsCu8YJ7PqY5gl/img-K2bLNfxPoMz1wH9GKbuCErQ0.png?st=2024-09-30T15%3A23%3A02Z&se=2024-09-30T17%3A23%3A02Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-09-29T19%3A20%3A38Z&ske=2024-09-30T19%3A20%3A38Z&sks=b&skv=2024-08-04&sig=wAzi4vKg8/blxHY25PyvKXXpYOxCQ6mVp7T%2B62MmX8k%3D" width="40"/>
-                    <span>Kazi Fahim</span>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid mt-4">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <i class="fas fa-user-graduate fa-2x text-success"></i>
-                            <h3>50,000</h3>
-                            <p>Students</p>
-                        </div>
+    <div class="dashboard-content">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Key Statistics</h5>
+                        <p class="card-text">Some example text.</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">50,000 Students</li>
+                            <li class="list-group-item">10,000 Teachers</li>
+                            <li class="list-group-item">15,000 Parents</li>
+                            <li class="list-group-item">$30,000 Total Earnings</li>
+                        </ul>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <i class="fas fa-chalkboard-teacher fa-2x text-primary"></i>
-                            <h3>10,000</h3>
-                            <p>Teachers</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <i class="fas fa-user-friends fa-2x text-warning"></i>
-                            <h3>15,000</h3>
-                            <p>Parents</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <i class="fas fa-dollar-sign fa-2x text-info"></i>
-                            <h3>$30,000</h3>
-                            <p>Total Earnings</p>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Fees Collection & Expenses</h5>
+                        <p class="card-text">Some example text.</p>
+                        <div class="chart-container">
+                            <canvas id="fees-collection-chart"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row mt-4">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">Fees Collection & Expenses</div>
-                        <div class="card-body">
-                            <canvas id="feesChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="social-card facebook">
-                                <i class="fab fa-facebook-f fa-2x"></i>
-                                <p>Like us on Facebook</p>
-                                <h3>30,000</h3>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="social-card twitter">
-                                <i class="fab fa-twitter fa-2x"></i>
-                                <p>Follow us on Twitter</p>
-                                <h3>13,000</h3>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mt-4">
-                            <div class="social-card google-plus">
-                                <i class="fab fa-google-plus-g fa-2x"></i>
-                                <p>Follow us on Google Plus</p>
-                                <h3>9,000</h3>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mt-4">
-                            <div class="social-card linkedin">
-                                <i class="fab fa-linkedin-in fa-2x"></i>
-                                <p>Follow us on LinkedIn</p>
-                                <h3>18,000</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <div class="col-md-6">
-                    <div class="calendar">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <button class="btn btn-light"><i class="fas fa-chevron-left"></i></button>
-                            <h5>14 April, 2017</h5>
-                            <button class="btn btn-light"><i class="fas fa-chevron-right"></i></button>
-                        </div>
-                        <div class="d-flex justify-content-between mt-3">
-                            <div class="day">Sun</div>
-                            <div class="day">Mon</div>
-                            <div class="day">Tue</div>
-                            <div class="day">Wed</div>
-                            <div class="day">Thu</div>
-                            <div class="day">Fri</div>
-                            <div class="day">Sat</div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-2">
-                            <div class="day">26</div>
-                            <div class="day">27</div>
-                            <div class="day">28</div>
-                            <div class="day">29</div>
-                            <div class="day">30</div>
-                            <div class="day">31</div>
-                            <div class="day">1</div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-2">
-                            <div class="day">2</div>
-                            <div class="day">3</div>
-                            <div class="day">4</div>
-                            <div class="day">5</div>
-                            <div class="day">6</div>
-                            <div class="day">7</div>
-                            <div class="day">8</div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-2">
-                            <div class="day">9</div>
-                            <div class="day">10</div>
-                            <div class="day">11</div>
-                            <div class="day">12</div>
-                            <div class="day active">13</div>
-                            <div class="day">14</div>
-                            <div class="day">15</div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-2">
-                            <div class="day">16</div>
-                            <div class="day">17</div>
-                            <div class="day">18</div>
-                            <div class="day">19</div>
-                            <div class="day">20</div>
-                            <div class="day">21</div>
-                            <div class="day">22</div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-2">
-                            <div class="day">23</div>
-                            <div class="day">24</div>
-                            <div class="day">25</div>
-                            <div class="day event">26</div>
-                            <div class="day">27</div>
-                            <div class="day">28</div>
-                            <div class="day">29</div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-2">
-                            <div class="day">30</div>
-                            <div class="day">1</div>
-                            <div class="day">2</div>
-                            <div class="day">3</div>
-                            <div class="day">4</div>
-                            <div class="day">5</div>
-                            <div class="day">6</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="notice-board">
-                        <h5>Notice Board</h5>
-                        <div class="notice">
-                            <p class="date">16 May, 2017</p>
-                            <p><strong>Jennyfar Lopez</strong> 5 min ago</p>
-                            <p>Great School managmenesom simply dumy text of the printing.</p>
-                        </div>
-                        <div class="notice">
-                            <p class="date">16 May, 2017</p>
-                            <p><strong>Killar Miller</strong> 55 min ago</p>
-                            <p>Great School managmenesom simply dumy text of the printing.</p>
-                        </div>
-                        <div class="notice">
-                            <p class="date">16 May, 2017</p>
-                            <p><strong>Jennyfar Lopez</strong> 5 min ago</p>
-                            <p>Great School managmenesom simply.</p>
-                        </div>
-                        <div class="notice">
-                            <p class="date">16 May, 2017</p>
-                            <p><strong>Mike Hussy</strong> 5 min ago</p>
-                            <p>Great School managmenesom simply.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="recent-activities">
-                        <h5>Recent Activities</h5>
-                        <div class="activity">
-                            <p class="time">9 minutes ago</p>
-                            <p>You followed Olivia Williamson</p>
-                        </div>
-                        <div class="activity">
-                            <p class="time">20 minutes ago</p>
-                            <p>You Subscribed to Harold Fuller</p>
-                        </div>
-                        <div class="activity">
-                            <p class="time">30 minutes ago</p>
-                            <p>You updated your profile picture</p>
-                        </div>
-                        <div class="activity">
-                            <p class="time">35 minutes ago</p>
-                            <p>You deleted homepage.psd</p>
-                        </div>
-                        <div class="activity">
-                            <p class="time">35 minutes ago</p>
-                            <p>You deleted homepage.psd</p>
-                        </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Social Media Stats</h5>
+                        <p class="card-text">Some example text.</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Facebook: 30,000 likes</li>
+                            <li class="list-group-item">Twitter: 13,000 followers</li>
+                            <li class="list-group-item">Google Plus: 9,000 followers</li>
+                            <li class="list-group-item">LinkedIn: 18,000 followers</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <footer class="text-center mt-4">
-            <p>© Copyrights Harra 
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Event Calendar</h5>
+                        <p class="card-text">Some example text.</p>
+                        <div class="calendar-container">
+                            <div id="calendar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Notice Board</h5>
+                        <p class="card-text">Some example text.</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Notice 1</li>
+                            <li class="list-group-item">Notice 2</li>
+                            <li class="list-group-item">Notice 3</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Recent Activities</h5>
+                        <p class="card-text">Some example text.</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Activity 1</li>
+                            <li class="list-group-item">Activity 2</li>
+                            <li class="list-group-item">Activity 3</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+#calendar {
+    width: 400px;
+    height: 400px;
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+#calendar table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#calendar th, #calendar td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+#calendar th {
+    background-color: #f0f0f0;
+}

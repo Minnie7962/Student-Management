@@ -28,6 +28,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard.index');
+})->middleware(['auth'])->name('dashboard');
+
 // Authentication routes
 Route::middleware('guest')->group(function () {
     Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
