@@ -11,6 +11,8 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\LibraryBookController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 // Welcome page (accessible to everyone)
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard.index');
@@ -41,6 +43,12 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', 'Auth\RegisterController@register');
 });
 
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login'); 
+Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register'); 
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register'); 
+
 // Logout route (accessible to authenticated users only)
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout')->middleware('auth');
 
@@ -50,6 +58,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 
     // Dashboard quick links (replace with actual routes)
     Route::get('/students', [DashboardController::class, 'students'])->name('students');
