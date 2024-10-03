@@ -1,5 +1,3 @@
-<!-- resources\views\payments\show.blade.php -->
-
 <h1>Show Payment</h1>
 
 <p>Student Name: {{ $payment->student->name }}</p>

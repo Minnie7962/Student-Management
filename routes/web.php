@@ -89,6 +89,4 @@ require __DIR__.'/auth.php';
 require __DIR__.'/admin-auth.php';
 require __DIR__.'/teacher-auth.php';
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/homepage', 'HomeController@index')->name('homepage');
