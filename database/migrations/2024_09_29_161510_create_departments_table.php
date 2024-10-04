@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description');
+            $table->string('code')->unique();
+            $table->text('description')->nullable();
+            $table->foreignId('head_of_department')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

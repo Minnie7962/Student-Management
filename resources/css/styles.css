@@ -19,3 +19,11 @@
 #calendar th {
     background-color: #f0f0f0;
 }
+
+.progress-bar {
+    width: 0;
+}
+
+.progress-bar[data-progress] {
+    width: attr(data-progress);
+}

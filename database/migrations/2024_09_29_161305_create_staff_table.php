@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email');
-            $table->string('role');
-            $table->text('attendance');
-            $table->text('payroll');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('staff_id')->unique();
+            $table->foreignId('department_id')->constrained();
+            $table->string('designation');
+            $table->date('joining_date');
+            $table->decimal('salary', 10, 2);
+            $table->text('qualifications');
             $table->timestamps();
         });
     }
